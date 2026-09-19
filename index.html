@@ -3,96 +3,179 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>harmoniamundi — applications</title>
+    <meta name="description" content="Les applications musicales de Harmonia Mundi." />
+    <title>Harmonia Mundi — applications</title>
     <style>
       :root {
-        --bg: #0b0d10;
-        --panel: #171b20;
-        --text: #edf2f7;
-        --muted: #c6ced6;
-        --accent: #86b7ff;
-        --radius: 18px;
+        --bg: #090b0f;
+        --panel: #151a21;
+        --panel-hover: #1b222c;
+        --text: #f3f6fa;
+        --muted: #b8c2cd;
+        --accent: #8dbdff;
+        --line: rgba(255, 255, 255, 0.1);
+        --radius: 20px;
       }
+
       * { box-sizing: border-box; }
+
       body {
         margin: 0;
         min-height: 100vh;
-        background: radial-gradient(circle at top, #182331, var(--bg) 42%);
+        background:
+          radial-gradient(circle at 50% -10%, rgba(89, 132, 190, 0.3), transparent 38rem),
+          var(--bg);
         color: var(--text);
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-      .wrap { max-width: 1200px; margin: 0 auto; padding: 48px 20px 80px; }
-      .hero { text-align: center; margin-bottom: 40px; }
-      .hero h1 { margin: 0; font-size: clamp(2.2rem, 4vw, 4rem); letter-spacing: -0.06em; }
-      .hero p { max-width: 760px; margin: 14px auto 0; color: var(--muted); font-size: 1.05rem; }
-      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+
+      .wrap {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 64px 0 88px;
+      }
+
+      .hero {
+        max-width: 760px;
+        margin: 0 auto 48px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 6vw, 4.8rem);
+        line-height: 1;
+        letter-spacing: -0.065em;
+      }
+
+      .hero p {
+        margin: 18px auto 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px;
+      }
+
       .app {
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,.1);
+        border: 1px solid var(--line);
         border-radius: var(--radius);
-        background: linear-gradient(180deg, #1b1f24, var(--panel));
-        box-shadow: 0 18px 34px rgba(0,0,0,.28);
-        transition: transform .18s ease, box-shadow .18s ease;
+        background: linear-gradient(145deg, var(--panel-hover), var(--panel));
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
       }
-      .app:hover { transform: translateY(-5px); box-shadow: 0 24px 40px rgba(0,0,0,.4); }
-      .app a { display: block; color: inherit; text-decoration: none; }
+
+      .app:hover {
+        transform: translateY(-5px);
+        border-color: rgba(141, 189, 255, 0.55);
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.42);
+      }
+
+      .app a {
+        display: block;
+        height: 100%;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .thumb-frame {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 285px;
+        padding: 16px;
+        background: #0e131a;
+        border-bottom: 1px solid var(--line);
+      }
+
       .thumb {
         display: block;
         width: 100%;
-        height: 220px;
-        object-fit: cover;
+        height: 253px;
+        object-fit: contain;
         object-position: center;
-        background: #111821;
-        border-bottom: 1px solid rgba(255,255,255,.08);
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
       }
-      .content { padding: 16px 16px 18px; }
-      .content h2 { margin: 0 0 8px; font-size: 1.28rem; }
-      .content p { margin: 0; color: var(--muted); line-height: 1.5; font-size: .96rem; }
+
+      .content {
+        padding: 20px 22px 22px;
+      }
+
+      .content h2 {
+        margin: 0 0 8px;
+        font-size: 1.35rem;
+        letter-spacing: -0.02em;
+      }
+
+      .content p {
+        min-height: 48px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.55;
+      }
+
       .tag {
         display: inline-block;
-        margin-top: 14px;
-        padding: 7px 10px;
-        border: 1px solid rgba(134,183,255,.28);
+        margin-top: 18px;
+        padding: 8px 12px;
+        border: 1px solid rgba(141, 189, 255, 0.3);
         border-radius: 999px;
-        background: rgba(134,183,255,.12);
+        background: rgba(141, 189, 255, 0.12);
         color: var(--accent);
-        font-size: .78rem;
+        font-size: 0.78rem;
         font-weight: 700;
-        letter-spacing: .04em;
+        letter-spacing: 0.05em;
         text-transform: uppercase;
       }
-      @media (max-width: 640px) { .wrap { padding-top: 30px; } .thumb { height: 190px; } }
+
+      @media (max-width: 760px) {
+        .wrap { width: min(100% - 28px, 560px); padding-top: 40px; }
+        .grid { grid-template-columns: 1fr; gap: 22px; }
+        .thumb-frame { min-height: 240px; }
+        .thumb { height: 208px; }
+      }
     </style>
   </head>
   <body>
     <div class="wrap">
       <header class="hero">
-        <h1>harmoniamundi</h1>
-        <p>Une collection d’applications musicales et visuelles. Chaque projet explore le rythme, l’harmonie, la structure et le temps.</p>
+        <h1>Harmonia Mundi</h1>
+        <p>Des applications pour explorer le rythme, les gammes, les modes et l’harmonie.</p>
       </header>
+
       <main class="grid">
         <article class="app">
           <a href="https://harmoniamundi.github.io/metronome/" target="_blank" rel="noopener noreferrer">
-            <img class="thumb" src="Metronome.png" alt="Capture de l’application Metronome">
-            <div class="content"><h2>Metronome</h2><p>Le temps découpé en tranches fines, dans une logique de pulsation et de durée.</p><span class="tag">Ouvrir</span></div>
+            <div class="thumb-frame"><img class="thumb" src="Metronome.png" alt="Capture de l’application Metronome" /></div>
+            <div class="content"><h2>Metronome</h2><p>Le temps découpé en tranches fines.</p><span class="tag">Ouvrir</span></div>
           </a>
         </article>
+
         <article class="app">
           <a href="https://harmoniamundi.github.io/dominos/" target="_blank" rel="noopener noreferrer">
-            <img class="thumb" src="Dominos.png" alt="Capture de l’application Dominos">
-            <div class="content"><h2>Dominos</h2><p>Une cartographie des notes, pensée comme un réseau de relations et de chemins.</p><span class="tag">Ouvrir</span></div>
+            <div class="thumb-frame"><img class="thumb" src="Dominos.png" alt="Capture de l’application Dominos" /></div>
+            <div class="content"><h2>Dominos</h2><p>Une cartographie des degrés et de notes à chanter.</p><span class="tag">Ouvrir</span></div>
           </a>
         </article>
+
         <article class="app">
           <a href="https://harmoniamundi.github.io/mode-machine/" target="_blank" rel="noopener noreferrer">
-            <img class="thumb" src="Mode-Machine.png" alt="Capture de l’application Mode Machine">
-            <div class="content"><h2>Mode Machine</h2><p>Des gammes et des modes qui se mettent en mouvement dans une logique visuelle.</p><span class="tag">Ouvrir</span></div>
+            <div class="thumb-frame"><img class="thumb" src="Mode-Machine.png" alt="Capture de l’application Mode Machine" /></div>
+            <div class="content"><h2>Mode Machine</h2><p>Voir et entendre les gammes et les modes.</p><span class="tag">Ouvrir</span></div>
           </a>
         </article>
+
         <article class="app">
           <a href="https://harmoniamundi.github.io/Chord-Scales/" target="_blank" rel="noopener noreferrer">
-            <img class="thumb" src="Chord-Scales.png" alt="Capture de l’application Chord Scales">
-            <div class="content"><h2>Chord Scales</h2><p>Exploration des accords et des gammes pour construire des textures harmoniques.</p><span class="tag">Ouvrir</span></div>
+            <div class="thumb-frame"><img class="thumb" src="Chord-Scales.png" alt="Capture de l’application Chord Scales" /></div>
+            <div class="content"><h2>Chord Scales</h2><p>Savoir quelle gamme utiliser avec un accord.</p><span class="tag">Ouvrir</span></div>
           </a>
         </article>
       </main>
